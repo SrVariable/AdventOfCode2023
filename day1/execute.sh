@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git submodule update --init --recursive
 make re -C BFL
 make re -C get_next_line
 
