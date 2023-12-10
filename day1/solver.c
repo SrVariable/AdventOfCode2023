@@ -38,9 +38,11 @@ int	main(int argc, char **argv)
 	int		counter;
 	int		sum;
 
+	if (argc < 2)
+		return (1);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (1);
+		return (2);
 	counter = 0;
 	sum = 0;
 	line[counter] = get_next_line(fd);
