@@ -55,5 +55,6 @@ int	main(int argc, char **argv)
 	printf("The solution is: %d\n", sum);
 	while (counter--)
 		free(line[counter]);
+	close(fd);
 	return (0);
 }
