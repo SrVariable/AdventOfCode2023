@@ -140,19 +140,19 @@ int	valid_draft(char **draft)
 					{
 						if (value > MAX_RED)
 							return (0);
-						break;
+						break ;
 					}
 					else if (ft_strncmp(&draft[k][i + j], "blue", 4) == 0)
 					{
 						if (value > MAX_BLUE)
 							return (0);
-						break;
+						break ;
 					}
 					else if (ft_strncmp(&draft[k][i + j], "green", 5) == 0)
 					{
 						if (value > MAX_GREEN)
 							return (0);
-						break;
+						break ;
 					}
 					j++;
 				}
@@ -182,7 +182,7 @@ int	get_game_id(char *line)
 				if (ft_isdigit(line[i + 2]))
 					id = id * 10 + line[i + 2] - '0';
 			}
-			break;
+			break ;
 		}
 		i++;
 	}
