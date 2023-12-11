@@ -1,9 +1,12 @@
 [submodule "day1/get_next_line"]
 	path = day1/get_next_line
 	url = https://github.com/SrVariable/get_next_line
-[submodule "day1/bfl"]
-	path = day1/bfl
-	url = https://github.com/SrVariable/bfl
 [submodule "day1/BFL"]
 	path = day1/BFL
 	url = https://github.com/SrVariable/BFL
+[submodule "day2/BFL"]
+	path = day2/BFL
+	url = git@github.com:SrVariable/BFL.git
+[submodule "day2/get_next_line"]
+	path = day2/get_next_line
+	url = git@github.com:SrVariable/get_next_line.git
