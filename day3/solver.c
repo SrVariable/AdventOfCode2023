@@ -150,25 +150,30 @@ int	get_number(char **file, t_pos *pos)
 
 void	parse_map(char **file, t_pos *pos)
 {
-	int	sum = 0;
+	int	sum;
+
+	sum = 0;
 	pos->ymax = ft_strlen(file[0]);
-	for (int i = 0; file[i]; i++)
+	pos->x = 0;
+	while (file[pos->x])
 	{
-		for (int j = 0; file[i][j]; j++)
+		pos->y = 0;
+		while (file[pos->x][pos->y])
 		{
-			if (ft_isdigit(file[i][j]))
+			if (ft_isdigit(file[pos->x][pos->y]))
 			{
-				pos->x = i;
-				pos->y = j;
 				if (check_symbol(file, pos))
 				{
 					sum += get_number(file, pos);
-					while (file[i][j + 1] != '\0' && ft_isdigit(file[i][j]))
-						j++;
-					j--;
+					while (file[pos->x][pos->y + 1] != '\0'
+							&& ft_isdigit(file[pos->x][pos->y]))
+						pos->y++;
+					pos->y--;
 				}
 			}
+			pos->y++;
 		}
+		pos->x++;
 	}
 	printf("The solution is: %d\n", sum);
 }
