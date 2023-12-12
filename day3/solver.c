@@ -11,6 +11,42 @@ typedef struct s_pos
 	int	ymax;
 }		t_pos;
 
+int		check_left(char **block, t_pos *pos);
+int		check_right(char **block, t_pos *pos);
+int		check_up(char **block, t_pos *pos);
+int		check_down(char **block, t_pos *pos);
+int		check_diagonal1(char **block, t_pos *pos);
+int		check_diagonal2(char **block, t_pos *pos);
+int		check_diagonal3(char **block, t_pos *pos);
+int		check_diagonal4(char **block, t_pos *pos);
+int		check_symbol(char **block, t_pos *pos);
+char	*get_lines(int fd, t_pos *pos);
+void	free_file(char ***file);
+int		get_number(char **file, t_pos *pos);
+void	parse_map(char **file, t_pos *pos);
+
+int	main(int argc, char **argv)
+{
+	char	*temp;
+	char	**file;
+	int		fd;
+	t_pos	pos;
+
+	if (argc < 2)
+		return (1);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (2);
+	temp = get_lines(fd, &pos);
+	file = ft_split(temp, '\n');
+	free(temp);
+	temp = NULL;
+	parse_map(file, &pos);
+	free_file(&file);
+	close(fd);
+	return (0);
+}
+
 int	check_left(char **block, t_pos *pos)
 {
 	if (pos->y - 1 >= 0)
@@ -176,26 +212,5 @@ void	parse_map(char **file, t_pos *pos)
 		pos->x++;
 	}
 	printf("The solution is: %d\n", sum);
-}
-
-int	main(int argc, char **argv)
-{
-	char	*temp;
-	char	**file;
-	int		fd;
-	t_pos	pos;
-
-	if (argc < 2)
-		return (1);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (2);
-	temp = get_lines(fd, &pos);
-	file = ft_split(temp, '\n');
-	free(temp);
-	temp = NULL;
-	parse_map(file, &pos);
-	free_file(&file);
-	close(fd);
-	return (0);
+	return ;
 }

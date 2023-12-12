@@ -7,6 +7,44 @@
 #include "get_next_line/get_next_line.h"
 #include "BFL/include/bfl.h"
 
+int		count_draft(char *line);
+char	**free_draft(char ***draft, int position);
+char	**mem_draft(char *line);
+char	**get_draft(char *line);
+int		count_cubes(char *draft);
+int		valid_draft(char **draft);
+int		get_game_id(char *line);
+
+int	main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
+	char	**draft;
+	int		sum;
+
+	if (argc < 2)
+		return (1);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (2);
+	line = get_next_line(fd);
+	sum = 0;
+	while (line)
+	{
+		draft = get_draft(ft_strchr(line, ':') + 1);
+		if (!draft)
+			return (4);
+		if (valid_draft(draft) == 1)
+			sum += get_game_id(line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	printf("The solution is: %d\n", sum);
+	free(line);
+	close(fd);
+	return (0);
+}
+
 int	count_drafts(char *line)
 {
 	int	i;
@@ -187,34 +225,4 @@ int	get_game_id(char *line)
 		i++;
 	}
 	return (id);
-}
-
-int	main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-	char	**draft;
-	int		sum;
-
-	if (argc < 2)
-		return (1);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (2);
-	line = get_next_line(fd);
-	sum = 0;
-	while (line)
-	{
-		draft = get_draft(ft_strchr(line, ':') + 1);
-		if (!draft)
-			return (4);
-		if (valid_draft(draft) == 1)
-			sum += get_game_id(line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	printf("The solution is: %d\n", sum);
-	free(line);
-	close(fd);
-	return (0);
 }
