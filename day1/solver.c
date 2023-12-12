@@ -1,9 +1,7 @@
 #define MAX 5000
 
-#include <stdio.h>
 #include <fcntl.h>
-#include "get_next_line/get_next_line.h"
-#include "BFL/include/bfl.h"
+#include "../BFL/include/bfl.h"
 
 int	first_last_value(char *line);
 
@@ -28,7 +26,7 @@ int	main(int argc, char **argv)
 		counter++;
 		line[counter] = get_next_line(fd);
 	}
-	printf("The solution is: %d\n", sum);
+	ft_printf("The solution is: %d\n", sum);
 	while (counter--)
 		free(line[counter]);
 	close(fd);

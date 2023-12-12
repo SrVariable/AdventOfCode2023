@@ -2,10 +2,8 @@
 #define MAX_GREEN 13
 #define MAX_BLUE 14
 
-#include <stdio.h>
 #include <fcntl.h>
-#include "get_next_line/get_next_line.h"
-#include "BFL/include/bfl.h"
+#include "../BFL/include/bfl.h"
 
 int		count_draft(char *line);
 char	**free_draft(char ***draft, int position);
@@ -39,7 +37,7 @@ int	main(int argc, char **argv)
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("The solution is: %d\n", sum);
+	ft_printf("The solution is: %d\n", sum);
 	free(line);
 	close(fd);
 	return (0);
