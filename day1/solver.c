@@ -5,31 +5,7 @@
 #include "get_next_line/get_next_line.h"
 #include "BFL/include/bfl.h"
 
-int	first_last_value(char *line)
-{
-	int	counter;
-	int	result;
-	int	number_counter;
-	int	last;
-
-	if (!line)
-		return (0);
-	counter = 0;
-	number_counter = 0;
-	while (line[counter])
-	{
-		if (ft_isdigit(line[counter]))
-		{
-			if (number_counter == 0)
-				result = line[counter] - '0';
-			last = line[counter] - '0';
-			number_counter++;
-		}
-		counter++;
-	}
-	result = result * 10 + last;
-	return (result);
-}
+int	first_last_value(char *line);
 
 int	main(int argc, char **argv)
 {
@@ -57,4 +33,30 @@ int	main(int argc, char **argv)
 		free(line[counter]);
 	close(fd);
 	return (0);
+}
+
+int	first_last_value(char *line)
+{
+	int	counter;
+	int	result;
+	int	number_counter;
+	int	last;
+
+	if (!line)
+		return (0);
+	counter = 0;
+	number_counter = 0;
+	while (line[counter])
+	{
+		if (ft_isdigit(line[counter]))
+		{
+			if (number_counter == 0)
+				result = line[counter] - '0';
+			last = line[counter] - '0';
+			number_counter++;
+		}
+		counter++;
+	}
+	result = result * 10 + last;
+	return (result);
 }
