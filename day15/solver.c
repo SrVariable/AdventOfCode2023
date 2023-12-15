@@ -1,6 +1,31 @@
 #include "../BFL/include/bfl.h"
 #include <fcntl.h>
 
+void	free_split(char ***str);
+int		encoder(char *line);
+int		get_sum(char **split);
+
+int	main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
+	char	**split;
+
+	if (argc < 2)
+		return (1);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (2);
+	line = get_next_line(fd);
+	if (!line)
+		return (3);
+	split = ft_split(line, ',');
+	ft_printf("The solution is: %d\n", get_sum(split));
+	free_split(&split);
+	free(line);
+	return (0);
+}
+
 void	free_split(char ***str)
 {
 	int i;
@@ -46,25 +71,4 @@ int	get_sum(char **split)
 		i++;
 	}
 	return (sum);
-}
-
-int	main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-	char	**split;
-
-	if (argc < 2)
-		return (1);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (2);
-	line = get_next_line(fd);
-	if (!line)
-		return (3);
-	split = ft_split(line, ',');
-	ft_printf("The solution is: %d\n", get_sum(split));
-	free_split(&split);
-	free(line);
-	return (0);
 }

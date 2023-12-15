@@ -1,6 +1,36 @@
 #include "../BFL/include/bfl.h"
 #include <fcntl.h>
 
+void	free_split(char ***str);
+int		get_points(char **winnercard, char **mycard);
+int		get_sum(char *line);
+
+int	main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
+	int		sum;
+
+	if (argc < 2)
+		return (1);
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		return (2);
+	sum = 0;
+	line = get_next_line(fd);
+	if (!line)
+		return (3);
+	while (line)
+	{
+		sum += get_sum(ft_strchr(line, ':') + 1);
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	ft_printf("The solution is: %d\n", sum);
+	close(fd);
+}
+
 void	free_split(char ***str)
 {
 	int	i;
@@ -70,30 +100,4 @@ int	get_sum(char *line)
 	free_split(&winnercard);
 	free_split(&mycard);
 	return (points);
-}
-
-int	main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-	int		sum;
-
-	if (argc < 2)
-		return (1);
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		return (2);
-	sum = 0;
-	line = get_next_line(fd);
-	if (!line)
-		return (3);
-	while (line)
-	{
-		sum += get_sum(ft_strchr(line, ':') + 1);
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	ft_printf("The solution is: %d\n", sum);
-	close(fd);
 }
